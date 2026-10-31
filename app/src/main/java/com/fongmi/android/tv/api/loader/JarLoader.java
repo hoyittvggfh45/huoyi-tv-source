@@ -217,6 +217,10 @@ public class JarLoader {
         return new DexClassLoader(file.getAbsolutePath(), cachePath, cachePath, RuntimeModule.getSpiderClassLoader());
     }
 
+    public static List<String> listSpiders(File file) throws Exception {
+        return spiders(file);
+    }
+
     @SuppressWarnings("deprecation")
     static List<String> spiders(File file) throws Exception {
         DexClassLoader loader = openDex(file);

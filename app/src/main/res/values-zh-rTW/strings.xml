@@ -377,6 +377,10 @@
     <!-- Dialog -->
     <string name="dialog_edit">修改</string>
     <string name="dialog_import">匯入</string>
+    <string name="site_import_jar">匯入 jar</string>
+    <string name="site_import_success">已匯入 %1$d 個站點</string>
+    <string name="site_import_empty">jar 內沒有找到新爬蟲</string>
+    <string name="site_import_failed">匯入 jar 失敗</string>
     <string name="dialog_positive">確定</string>
     <string name="dialog_negative">取消</string>
     <string name="dialog_select_edition">選擇標題</string>

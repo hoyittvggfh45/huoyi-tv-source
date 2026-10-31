@@ -199,6 +199,7 @@ public class VodConfig extends BaseConfig {
         String spider = Json.safeString(object, "spider");
         BaseLoader.get().parseJar(spider, true);
         setSites(Json.safeListElement(object, "sites").stream().map(e -> Site.objectFrom(e, spider)).distinct().collect(Collectors.toCollection(ArrayList::new)));
+        ImportedSites.inject(getSites());
         Map<String, Site> items = Site.findAll().stream().collect(Collectors.toMap(Site::getKey, Function.identity()));
         getSites().forEach(site -> site.sync(items.get(site.getKey())));
         setHome(config, getSites().isEmpty() ? new Site() : getSites().stream().filter(item -> item.getKey().equals(config.getHome())).findFirst().orElse(getSites().get(0)), false);
@@ -211,6 +212,10 @@ public class VodConfig extends BaseConfig {
 
     public List<Site> getSites() {
         return sites == null ? Collections.emptyList() : sites;
+    }
+
+    public void refreshImported() {
+        if (sites != null) ImportedSites.inject(sites);
     }
 
     private void setSites(List<Site> sites) {

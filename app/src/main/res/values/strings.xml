@@ -379,6 +379,10 @@
     <!-- Dialog -->
     <string name="dialog_edit">Edit</string>
     <string name="dialog_import">Import</string>
+    <string name="site_import_jar">Import JAR</string>
+    <string name="site_import_success">Imported %1$d site(s)</string>
+    <string name="site_import_empty">No new spider found in JAR</string>
+    <string name="site_import_failed">Failed to import JAR</string>
     <string name="dialog_positive">OK</string>
     <string name="dialog_negative">Cancel</string>
     <string name="dialog_select_edition">Select title</string>
