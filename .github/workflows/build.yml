@@ -25,6 +25,11 @@ jobs:
           "$SDKMGR" --list_installed
           "$SDKMGR" "platform-tools" "platforms;android-37.0" "build-tools;35.0.0" "build-tools;37.0.0" "cmake;3.22.1" "ndk;28.2.13676358"
           if [ ! -d "$ANDROID_HOME/platforms/android-37" ]; then ln -s "$ANDROID_HOME/platforms/android-37.0" "$ANDROID_HOME/platforms/android-37"; fi
+      - name: Create local.properties for CI
+        run: |
+          printf 'sdk.dir=%s\nstoreFile=debug.keystore\nkeyAlias=debug\nstorePassword=debug\n' "$ANDROID_HOME" > local.properties
+      - name: Install patchelf
+        run: sudo apt-get update && sudo apt-get install -y patchelf
       - name: Build mobile debug APK
         run: ./gradlew :app:assembleMobileDebug --no-daemon
       - name: Upload APK
