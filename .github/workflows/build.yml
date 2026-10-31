@@ -18,7 +18,11 @@ jobs:
         run: |
           SDKMGR="$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager"
           [ -x "$SDKMGR" ] || SDKMGR=$(echo $ANDROID_HOME/cmdline-tools/*/bin/sdkmanager | cut -d' ' -f1)
-          yes | "$SDKMGR" --licenses >/dev/null
+          yes | "$SDKMGR" --licenses >/dev/null 2>&1 || true
+          "$SDKMGR" "cmdline-tools;latest"
+          SDKMGR="$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager"
+          yes | "$SDKMGR" --licenses >/dev/null 2>&1 || true
+          "$SDKMGR" --list_installed
           "$SDKMGR" "platform-tools" "platforms;android-37" "build-tools;35.0.0" "build-tools;37.0.0" "cmake;3.22.1" "ndk;28.2.13676358"
       - name: Build mobile debug APK
         run: ./gradlew :app:assembleMobileDebug --no-daemon
